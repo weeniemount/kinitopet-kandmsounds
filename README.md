@@ -9,6 +9,10 @@ Step 2. Run the program
 ```
 python main.py
 ```
+You can also run ui.py for a tkinter ui!
+```
+python ui.py
+```
 # Other stuff
 Feel free to do pull requests, issues and other! I would love contribution!
 
