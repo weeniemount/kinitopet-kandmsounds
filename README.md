@@ -11,3 +11,5 @@ python main.py
 ```
 # Other stuff
 Feel free to do pull requests, issues and other! I would love contribution!
+
+BTW this is my first actual github repo
