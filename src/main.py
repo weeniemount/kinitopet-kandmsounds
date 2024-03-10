@@ -14,35 +14,10 @@ mouseScrollSoundsDisabled = False
 pcBuzzSoundsDisabled = False
 pcAmbienceSoundsDisabled = False
 
-def play_sound(sound_file, types):
-    #keyboard
-    keychannel = pygame.mixer.Channel(0)
-    keyupchannel = pygame.mixer.Channel(1)
-
-    #mouse
-    mousechannel = pygame.mixer.Channel(2)
-    mouseupchannel = pygame.mixer.Channel(3)
-    scrollchannel = pygame.mixer.Channel(4)
-    if types == "keyboard":
-        pygame.mixer.init()
-        sound = pygame.mixer.Sound(sound_file)
-        keychannel.play(sound)
-    elif types == "keyboardup":
-        pygame.mixer.init()
-        sound = pygame.mixer.Sound(sound_file)
-        keyupchannel.play(sound)
-    elif types == "mouse":
-        pygame.mixer.init()
-        sound = pygame.mixer.Sound(sound_file)
-        mousechannel.play(sound)
-    elif types == "mouseup":
-        pygame.mixer.init()
-        sound = pygame.mixer.Sound(sound_file)
-        mouseupchannel.play(sound)
-    elif types == "mousescroll":
-        pygame.mixer.init()
-        sound = pygame.mixer.Sound(sound_file)
-        scrollchannel.play(sound)
+def play_sound(sound_file):
+    pygame.mixer.init()
+    sound = pygame.mixer.Sound(sound_file)
+    sound.play()
 
 # handle keyboard sounds when held down
 def on_key_press(key):
@@ -53,9 +28,9 @@ def on_key_press(key):
             key_char = str(key)
         print(key_char)
         if key_char == "Key.enter" or key_char == "Key.backspace" or key_char == "Key.space" or key_char == "Key.caps_lock" or key_char == "Key.shift" or key_char == "Key.shift_r" or key_char == "Key.ctrl_l" or key_char == "Key.ctrl_r" or key_char == "Key.alt_l" or key_char == "Key.alt_gr":
-            play_sound(soundsdir + "/KeyboardDown2.ogg", "keyboard")
+            play_sound(soundsdir + "/KeyboardDown2.ogg")
         else:
-            play_sound(soundsdir + "/KeyboardDown.ogg", "keyboard")
+            play_sound(soundsdir + "/KeyboardDown.ogg")
 
 # handle keyboard sounds when held up
 def on_key_release(key):
@@ -65,17 +40,17 @@ def on_key_release(key):
         except AttributeError:
             key_char = str(key)
         if key_char == "Key.enter" or key_char == "Key.backspace" or key_char == "Key.space" or key_char == "Key.caps_lock" or key_char == "Key.shift" or key_char == "Key.shift_r" or key_char == "Key.ctrl_l" or key_char == "Key.ctrl_r" or key_char == "Key.alt_l" or key_char == "Key.alt_gr":
-            play_sound(soundsdir + "/KeyboardUp2.ogg", "keyboardup")
+            play_sound(soundsdir + "/KeyboardUp2.ogg")
         else:
-            play_sound(soundsdir + "/KeyboardUp.ogg", "keyboardup")
+            play_sound(soundsdir + "/KeyboardUp.ogg")
 
 # handle mouse scrolling sounds
 def on_scroll(x, y, dx, dy):
     if mouseScrollSoundsDisabled == False:
         if dy > 0:
-            play_sound(soundsdir + "/MouseWheel.ogg", "mousescroll")
+            play_sound(soundsdir + "/MouseWheel.ogg")
         elif dy < 0:
-            play_sound(soundsdir + "/MouseWheel.ogg", "mousescroll")
+            play_sound(soundsdir + "/MouseWheel.ogg")
 
 # handle mouse click sounds
 def on_click(x, y, button, pressed):
@@ -85,9 +60,9 @@ def on_click(x, y, button, pressed):
             action = 'Pressed' if pressed else 'Released'
 
             if mouse_button_state[mouse.Button.left] or mouse_button_state[mouse.Button.middle] or mouse_button_state[mouse.Button.right] or mouse_button_state[mouse.Button.x1] or mouse_button_state[mouse.Button.x2]:
-                play_sound(soundsdir + "/MouseDown.ogg", "mouse")
+                play_sound(soundsdir + "/MouseDown.ogg")
             elif mouse_button_state[mouse.Button.left] == False or mouse_button_state[mouse.Button.middle] == False or mouse_button_state[mouse.Button.right] == False or mouse_button_state[mouse.Button.x1] == False or mouse_button_state[mouse.Button.x2] == False:
-                play_sound(soundsdir + "/MouseUp.ogg", "mouseup")
+                play_sound(soundsdir + "/MouseUp.ogg")
 
 def key_listener():
     with keyboard.Listener(on_press=on_key_press, on_release=on_key_release) as keylistener:
@@ -100,11 +75,11 @@ def mouse_listener():
 def pcBuzzAmbience():
     pygame.mixer.init()
     #pc buzz
-    buzzChannel = pygame.mixer.Channel(5)
+    buzzChannel = pygame.mixer.Channel(1)
     buzz = pygame.mixer.Sound(soundsdir + "/AmbientBuzz.ogg")
     buzzChannel.play(buzz, -1)
     #pc ambience
-    ambienceChannel = pygame.mixer.Channel(6)
+    ambienceChannel = pygame.mixer.Channel(2)
     ambience = pygame.mixer.Sound(soundsdir + "/AmbientPCSounds.ogg")
     ambienceChannel.play(ambience, -1)
     while True:
